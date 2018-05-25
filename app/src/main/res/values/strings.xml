@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">probando1</string>
+    <string name="nuevo_donante">Nuevo Donante</string>
+    <string name="no_de_identificaci_n">No. de identificación</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="edad">Edad</string>
+    <string name="peso_kg">Peso (Kg)</string>
+    <string name="estatura_cm">Estatura (cm)</string>
+
+
+    <string-array name="tipoSangre">
+        <item>Tipo A</item>
+        <item>Tipo B</item>
+        <item>Tipo C</item>
+        <item>Tipo O</item>
+        <item>Tipo AB</item>
+    </string-array>
+
+    <string-array name="tipoRh">
+        <item>Rh +</item>
+        <item>Rh -</item>
+    </string-array>
+
+</resources>
