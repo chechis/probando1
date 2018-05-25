@@ -12,7 +12,6 @@
     <string-array name="tipoSangre">
         <item>Tipo A</item>
         <item>Tipo B</item>
-        <item>Tipo C</item>
         <item>Tipo O</item>
         <item>Tipo AB</item>
     </string-array>
