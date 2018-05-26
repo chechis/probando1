@@ -66,7 +66,7 @@ public class AlertaDatos extends DialogFragment{
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                agregarDonante();
             }
         });
 
@@ -81,9 +81,80 @@ public class AlertaDatos extends DialogFragment{
     }
 
     private void agregarDonante (){
-        if (!editIdentificacion.getEditText().getText().toString().equals("")){
+
+        boolean login = true;
+
+        if (editIdentificacion != null && editNombre != null && editApellido != null && editEdad != null
+                && editPeso != null && editEstatura != null){
+
+            String identificacion= editIdentificacion.getEditText().getText().toString();
+            String nombre= editNombre.getEditText().getText().toString();
+            String apellido= editApellido.getEditText().getText().toString();
+            String edad= editEdad.getEditText().getText().toString();
+            String peso= editPeso.getEditText().getText().toString();
+            String estatura= editEstatura.getEditText().getText().toString();
+
+
+
+            Donante.Tipo tipo = Donante.Tipo.A;
+            switch (spnTipo.getSelectedItemPosition()){
+                case 0:
+                    tipo = Donante.Tipo.A;
+                    break;
+                case 1:
+                    tipo = Donante.Tipo.B;
+                    break;
+                case 2:
+                    tipo = Donante.Tipo.O;
+                    break;
+                case 3:
+                    tipo = Donante.Tipo.AB;
+                    break;
+            }
+
+            Donante.Rh rh = Donante.Rh.positivo;
+            switch (spnTipo.getSelectedItemPosition()){
+                case 0:
+                    rh = Donante.Rh.positivo;
+                    break;
+                case 1:
+                    rh = Donante.Rh.negativo;
+                    break;
+            }
+
+            if (editIdentificacion.getEditText().getText().toString().equals("")){
+                editIdentificacion.setError("La identificación es requerida");
+                login = false;
+            }
+            if (editNombre.getEditText().getText().toString().equals("")){
+                editNombre.setError("El nombre es requerida");
+                login = false;
+            }
+            if (editApellido.getEditText().getText().toString().equals("")){
+                editApellido.setError("El apellido es requerido");
+                login = false;
+            }
+            if (editEdad.getEditText().getText().toString().equals("")){
+                editEdad.setError("La edad es requerida");
+                login = false;
+            }
+            if (editPeso.getEditText().getText().toString().equals("")){
+                editPeso.setError("El peso es requerido");
+                login = false;
+            }
+            if (editEstatura.getEditText().getText().toString().equals("")){
+                editEstatura.setError("La estatura es requerida");
+                login = false;
+            }
+
+            if (login){
+                Donante donante = new Donante(identificacion, nombre, apellido, edad, tipo, rh, peso, estatura);
+                listener.agregarDonante(donante);
+                dismiss();
+            }
 
         }
+
 
     }
 }

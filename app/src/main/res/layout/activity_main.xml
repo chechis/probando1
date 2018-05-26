@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lista"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aqui va..."
+        android:id="@+id/txt_probando"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_flotatne"
         android:layout_width="wrap_content"

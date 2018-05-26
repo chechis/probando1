@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos {
+import jcalv.probando1.modelo.Donante;
+
+public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +29,9 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
 
     }
 
-
     @Override
-    public void agregar(String identificacion) {
-
+    public void agregarDonante(Donante donante) {
+        TextView textView= (TextView) findViewById(R.id.txt_probando);
+        textView.setText((CharSequence) donante);
     }
 }
