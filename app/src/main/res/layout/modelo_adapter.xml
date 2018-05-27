@@ -11,7 +11,7 @@
     app:cardCornerRadius="6dp"
     app:cardBackgroundColor="@color/colorPrimaryDark"
     android:elevation="7dp"
-    >
+    android:id="@+id/cartd_view">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,16 +41,49 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_edad3"
                 android:text="edad"/>
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txt_sangre_tipo4"
-                android:text="sangre tipo"/>
-            <TextView
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_sangre_tipo41"
+                    android:text="sangre tipo"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_sangre_rh42"
+                    android:text="sangre Rh"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txt_peso_altura5"
-                android:text="peso y altura"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_peso51"
+                    android:text="peso"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_altura52"
+                    android:text="altura"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
