@@ -1,6 +1,8 @@
 package jcalv.probando1.modelo.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.ActivityChooserView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -68,13 +70,39 @@ public class DonanteAdapter extends RecyclerView.Adapter<DonanteAdapter.DonanteV
     @Override
     public void onBindViewHolder(DonanteViewHolder holder, int position) {
         holder.txtNombre.setText(getDonantes().get(position).getNombre());
-        holder.txtId.setText(getDonantes().get(position).getIdentificacion());
-        holder.txtEdad.setText(getDonantes().get(position).getEdad());
-        holder.txtPeso.setText(getDonantes().get(position).getPeso());
-        holder.txtEstatura.setText(getDonantes().get(position).getEstatura());
+        holder.txtId.setText("Identificacion  " + getDonantes().get(position).getIdentificacion());
+        holder.txtEdad.setText("Edad  "+ getDonantes().get(position).getEdad());
+        holder.txtPeso.setText("Peso  " + getDonantes().get(position).getPeso());
+        holder.txtEstatura.setText("Estatura  " + getDonantes().get(position).getEstatura());
         CardView cardView= (CardView) holder.itemView.findViewById(R.id.cartd_view);
 
-        switch ()
+        switch (getDonantes().get(position).getTipo()){
+            case A:
+                cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.colorTipoA));
+                holder.txtTipo.setText("Tipo  A");
+                break;
+            case B:
+                cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.colorTipoB));
+                holder.txtTipo.setText("Tipo  B");
+                break;
+            case AB:
+                cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.colorTipoAB));
+                holder.txtTipo.setText("Tipo  AB");
+                break;
+            case O:
+                cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.colorTipoO));
+                holder.txtTipo.setText("Tipo  O");
+                break;
+        }
+
+        switch (getDonantes().get(position).getRh()){
+            case positivo:
+                holder.txtRh.setText("Rh +");
+                break;
+            case negativo:
+                holder.txtRh.setText("Rh -");
+                break;
+        }
     }
 
     @Override

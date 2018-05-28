@@ -1,6 +1,8 @@
 package jcalv.probando1.modelo;
 
-public class Donante {
+import java.io.Serializable;
+
+public class Donante implements Serializable{
 
     public enum Tipo{
         A, B, O, AB
