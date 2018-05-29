@@ -94,8 +94,6 @@ public class AlertaDatos extends DialogFragment{
             String peso= editPeso.getEditText().getText().toString();
             String estatura= editEstatura.getEditText().getText().toString();
 
-
-
             Donante.Tipo tipo = Donante.Tipo.A;
             switch (spnTipo.getSelectedItemPosition()){
                 case 0:
