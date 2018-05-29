@@ -9,11 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
+import jcalv.probando1.MainActivity;
 import jcalv.probando1.R;
 import jcalv.probando1.modelo.Donante;
 
@@ -28,12 +31,13 @@ public class DonanteAdapter extends RecyclerView.Adapter<DonanteAdapter.DonanteV
 
     public class DonanteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView txtNombre, txtId, txtEdad, txtTipo, txtRh, txtPeso, txtEstatura;
+        TextView txtNombre, txtApellido, txtId, txtEdad, txtTipo, txtRh, txtPeso, txtEstatura;
 
         public DonanteViewHolder (View itemView){
             super(itemView);
 
-            txtNombre = (TextView) itemView.findViewById(R.id.txt_nombre1);
+            txtNombre = (TextView) itemView.findViewById(R.id.txt_nombre11);
+            txtApellido = (TextView) itemView.findViewById(R.id.txt_apellido12);
             txtId  = (TextView) itemView.findViewById(R.id.txt_id2);
             txtEdad  = (TextView) itemView.findViewById(R.id.txt_edad3);
             txtTipo = (TextView) itemView.findViewById(R.id.txt_sangre_tipo41);
@@ -64,12 +68,23 @@ public class DonanteAdapter extends RecyclerView.Adapter<DonanteAdapter.DonanteV
     public DonanteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.modelo_adapter, parent, false);
+
+        ImageButton imageButton= (ImageButton) view.findViewById(R.id.btn_edit);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(activity, "hola", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return new DonanteViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(DonanteViewHolder holder, int position) {
+    public void onBindViewHolder(DonanteViewHolder holder, final int position) {
         holder.txtNombre.setText(getDonantes().get(position).getNombre());
+        holder.txtApellido.setText(getDonantes().get(position).getApellido());
         holder.txtId.setText("Identificacion  " + getDonantes().get(position).getIdentificacion());
         holder.txtEdad.setText("Edad  "+ getDonantes().get(position).getEdad());
         holder.txtPeso.setText("Peso  " + getDonantes().get(position).getPeso());
@@ -103,6 +118,15 @@ public class DonanteAdapter extends RecyclerView.Adapter<DonanteAdapter.DonanteV
                 holder.txtRh.setText("Rh -");
                 break;
         }
+
+
+        ImageButton img = (ImageButton) holder.itemView.findViewById(R.id.btn_delete);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(activity, "hola"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

@@ -8,12 +8,13 @@ import jcalv.probando1.R;
 
 public class DonanteViewHolder extends RecyclerView.ViewHolder {
 
-    TextView txtNombre, txtId, txtEdad, txtTipo, txtRh, txtPeso, txtEstatura;
+    TextView txtNombre, txtApellido, txtId, txtEdad, txtTipo, txtRh, txtPeso, txtEstatura;
 
     public DonanteViewHolder(View itemView) {
         super(itemView);
 
-        txtNombre = (TextView) itemView.findViewById(R.id.txt_nombre1);
+        txtNombre = (TextView) itemView.findViewById(R.id.txt_nombre11);
+        txtApellido = (TextView) itemView.findViewById(R.id.txt_apellido12);
         txtId  = (TextView) itemView.findViewById(R.id.txt_id2);
         txtEdad  = (TextView) itemView.findViewById(R.id.txt_edad3);
         txtTipo = (TextView) itemView.findViewById(R.id.txt_sangre_tipo41);
