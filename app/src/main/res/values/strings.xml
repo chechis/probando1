@@ -7,6 +7,11 @@
     <string name="edad">Edad</string>
     <string name="peso_kg">Peso (Kg)</string>
     <string name="estatura_cm">Estatura (cm)</string>
+    <string name="bienvenido_al_control_de_donantes">Bienvenido al Control de Donantes</string>
+    <string name="confirmar_contrase_a">Confirmar contraseña</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="donantes_tool">Control de Donantes</string>
+    <string name="donante_tool">Donantes</string>
 
 
     <string-array name="tipoSangre">
