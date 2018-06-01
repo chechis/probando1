@@ -1,6 +1,7 @@
 package jcalv.probando1.inicio;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -11,11 +12,30 @@ import android.view.View;
 import android.widget.Button;
 
 import jcalv.probando1.R;
+import jcalv.probando1.modelo.Usuario;
 
 public class AlertaInicio extends DialogFragment {
 
+    private UsuariosListener listener;
+
+    public interface UsuariosListener {
+        void agregarUsuario (Usuario usuario);
+    }
+
+
+
     private Button btnRegistrar, btnCancelar;
     private TextInputLayout editUsuario, editContrasena, editConfirmar;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (UsuariosListener) context;
+        }catch (ClassCastException ex){
+            throw new ClassCastException("El contexto debe implementar la interfaz usuario");
+        }
+    }
 
     @NonNull
     @Override
@@ -36,7 +56,7 @@ public class AlertaInicio extends DialogFragment {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                agregarUsuario();
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +68,21 @@ public class AlertaInicio extends DialogFragment {
 
 
         return builder.create();
+    }
+
+    private void agregarUsuario (){
+
+        boolean login = true;
+
+        if (editUsuario !=null && editContrasena != null && editConfirmar != null){
+
+            String nombre = editUsuario.getEditText().getText().toString();
+            String contrasena = editContrasena.getEditText().getText().toString();
+            String confirmar = editConfirmar.getEditText().getText().toString();
+
+            if (editUsuario.getEditText().getText().toString().equals("")){
+                editUsuario
+            }
+        }
     }
 }
