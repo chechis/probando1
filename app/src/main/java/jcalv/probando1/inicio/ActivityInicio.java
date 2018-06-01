@@ -5,11 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import jcalv.probando1.MainActivity;
 import jcalv.probando1.R;
+import jcalv.probando1.almacenamiento.BaseDatos;
+import jcalv.probando1.modelo.Usuario;
 
-public class ActivityInicio extends AppCompatActivity {
+public class ActivityInicio extends AppCompatActivity implements AlertaInicio.UsuariosListener {
 
     Button btnRegistrar, btnIniciar;
 
@@ -43,4 +49,16 @@ public class ActivityInicio extends AppCompatActivity {
     }
 
 
+    @Override
+    public void agregarUsuario(Usuario usuario) {
+        String nombre = usuario.getNombre();
+        String contrasena = usuario.getContrasena();
+
+        //Toast.makeText(this, "Nombre :"+nombre+" Contrasena: "+contrasena, Toast.LENGTH_SHORT).show();
+
+        ServicioInicio servicioInicio = new ServicioInicio(nombre, contrasena, this);
+
+
+        servicioInicio.toast();
+    }
 }

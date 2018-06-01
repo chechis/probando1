@@ -23,9 +23,9 @@ public class AlertaInicio extends DialogFragment {
     }
 
 
-
     private Button btnRegistrar, btnCancelar;
     private TextInputLayout editUsuario, editContrasena, editConfirmar;
+
 
     @Override
     public void onAttach(Context context) {
@@ -81,7 +81,27 @@ public class AlertaInicio extends DialogFragment {
             String confirmar = editConfirmar.getEditText().getText().toString();
 
             if (editUsuario.getEditText().getText().toString().equals("")){
-                editUsuario
+                editUsuario.setError("El nombre es requerido");
+                login = false;
+            }
+            if (editContrasena.getEditText().getText().toString().equals("")){
+                editContrasena.setError("La contraseña es requerida");
+                login = false;
+            }
+            if (editConfirmar.getEditText().getText().toString().equals("")){
+                editConfirmar.setError("Vuelve a escribir tu contraseña");
+                login = false;
+            }
+            if (!editContrasena.getEditText().getText().toString().
+                    equals(editConfirmar.getEditText().getText().toString())){
+                editConfirmar.setError("Las contraseñas no coinciden");
+                login = false;
+            }
+
+            if (login){
+                Usuario usuario = new Usuario(nombre, contrasena);
+                listener.agregarUsuario(usuario);
+                dismiss();
             }
         }
     }

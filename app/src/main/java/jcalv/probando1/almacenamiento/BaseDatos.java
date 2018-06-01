@@ -1,5 +1,6 @@
 package jcalv.probando1.almacenamiento;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -21,6 +22,7 @@ public class BaseDatos extends SQLiteOpenHelper {
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + Estructura.EstructuraBase.TABLE_INICIO;
 
     public BaseDatos (Context context){
+
         super (context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
