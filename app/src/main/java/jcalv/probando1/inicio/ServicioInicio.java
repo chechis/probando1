@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import jcalv.probando1.MainActivity;
 import jcalv.probando1.almacenamiento.BaseDatos;
 import jcalv.probando1.almacenamiento.Estructura;
 
@@ -20,6 +21,7 @@ public class ServicioInicio {
     private String contrasena;
     private Activity activity;
     private Context context;
+    private MainActivity mainActivity;
 
     public ServicioInicio(String nombre, String contrasena, Activity activity) {
         this.nombre = nombre;
@@ -64,7 +66,15 @@ public class ServicioInicio {
         sq.close();
     }
 
-    public void confirmarUsuario (String nombre, String contrasena, BaseDatos baseDatos){
+
+    public ServicioInicio(String nombre, String contrasena, Activity activity, MainActivity mainActivity) {
+        this.nombre = nombre;
+        this.contrasena = contrasena;
+        this.activity = activity;
+        this.mainActivity = mainActivity;
+    }
+
+    public void confirmarUsuario (String nombre, String contrasena, BaseDatos baseDatos, Class clase){
         int aux = 0;
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
@@ -86,6 +96,8 @@ public class ServicioInicio {
 
             if (aux==1){
 
+                Intent intent = new Intent(activity, clase);
+                
 
             }else {
 
