@@ -1,5 +1,6 @@
 package jcalv.probando1.inicio;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,12 +54,13 @@ public class ActivityInicio extends AppCompatActivity implements AlertaInicio.Us
     public void agregarUsuario(Usuario usuario) {
         String nombre = usuario.getNombre();
         String contrasena = usuario.getContrasena();
+        BaseDatos baseDatos = new BaseDatos(this);
 
-        //Toast.makeText(this, "Nombre :"+nombre+" Contrasena: "+contrasena, Toast.LENGTH_SHORT).show();
 
         ServicioInicio servicioInicio = new ServicioInicio(nombre, contrasena, this);
 
 
         servicioInicio.toast();
+        servicioInicio.almacenarUsuario(nombre, contrasena, baseDatos);
     }
 }

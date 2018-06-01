@@ -11,19 +11,19 @@ public class BaseDatos extends SQLiteOpenHelper {
     private static final String coma = ",";
 
     private static final String Sentencia =
-            "CREATE TABLE " + Estructura.EstructuraBase.TABLE_INICIO + " ("
+            "CREATE TABLE " + Estructura.EstructuraBase.TABLE_NAME + " ("
             + Estructura.EstructuraBase._ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + Estructura.EstructuraBase.COLUMN_INICIO_CLIENTE + tipo + coma +
-            Estructura.EstructuraBase.COLUMN_INICIO_CONTRASENA + tipo + " )";
+            + Estructura.EstructuraBase.COLUMN_NAME_CLIENTE + tipo + coma +
+            Estructura.EstructuraBase.COLUMN_NAME_CONTRASENA + tipo + " )";
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Donantes.sqLite";
+    public static final String DATABASE_NAME = "Donante.sqLite";
 
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + Estructura.EstructuraBase.TABLE_INICIO;
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + Estructura.EstructuraBase.TABLE_NAME;
 
-    public BaseDatos (Context context){
+    public BaseDatos (Activity activity){
 
-        super (context, DATABASE_NAME, null, DATABASE_VERSION);
+        super (activity, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
