@@ -97,7 +97,7 @@ public class ServicioInicio {
             if (aux==1){
 
                 Intent intent = new Intent(activity, clase);
-                
+
 
             }else {
 
