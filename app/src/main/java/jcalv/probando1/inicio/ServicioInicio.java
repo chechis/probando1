@@ -29,11 +29,15 @@ public class ServicioInicio {
         this.activity = activity;
     }
 
+    public void toast (){
+        Toast.makeText(activity, "nombre : "+nombre + " contrasena : " + contrasena, Toast.LENGTH_SHORT).show();
+    }
+
     public void almacenarUsuario (String nombre, String contrasena, BaseDatos baseDatos){
         int aux = 0;
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
-        if (nombre != null && contrasena != null) {
+        if (nombre != null || contrasena != null) {
             String comparador1;
             Cursor cursor= sq.rawQuery("SELECT * FROM "+ Estructura.EstructuraBase.TABLE_NAME, null);
             if (cursor.moveToFirst()){
@@ -62,38 +66,37 @@ public class ServicioInicio {
         sq.close();
     }
 
-    public int confirmarUsuario (String nombre, String contrasena, BaseDatos baseDatos){
+
+    public ServicioInicio(String nombre, String contrasena, Activity activity, MainActivity mainActivity) {
+        this.nombre = nombre;
+        this.contrasena = contrasena;
+        this.activity = activity;
+        this.mainActivity = mainActivity;
+    }
+
+    public void confirmarUsuario (String nombre, String contrasena, BaseDatos baseDatos, Class clase){
         int aux = 0;
-        int aux2 = 0;
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
-        if (nombre != null && contrasena != null) {
+        if (nombre != null || contrasena != null) {
             String comparador1;
-            String comparador2;
             Cursor cursor= sq.rawQuery("SELECT * FROM "+ Estructura.EstructuraBase.TABLE_NAME, null);
             if (cursor.moveToFirst()){
 
                 do {
-                    Log.i("Usuario", cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_CLIENTE)));
-
-                    Log.i("Contrasena", cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_CONTRASENA)));
+                    Log.i("AG", cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_CLIENTE)));
 
                     comparador1 = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_CLIENTE));
-
-                    comparador2 = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_CONTRASENA));
-
-
                     if (comparador1.equals(nombre)){
                         aux = 1;
-                    }
-                    if (comparador2.equals(contrasena)){
-                        aux2 = 1;
                     }
                 }while (cursor.moveToNext());
             }
 
+            if (aux==1){
 
+<<<<<<< HEAD
 <<<<<<< HEAD
                 Intent intent = new Intent(activity, clase);
 
@@ -108,13 +111,17 @@ public class ServicioInicio {
 
             if (aux==1 && aux2==1){
                 aux = 2;
+=======
+                Intent intent = new Intent(activity, clase);
+                
+>>>>>>> parent of 2dfd3a0... Paso 1 completado
 
             }else {
+
                 Toast.makeText(activity, "Crea una sesión", Toast.LENGTH_SHORT).show();
             }
         }
         sq.close();
-        return aux;
 
     }
 

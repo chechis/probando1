@@ -48,36 +48,23 @@ public class ActivityInicio extends AppCompatActivity implements AlertaInicio.Us
 
     }
     public void iniciar (View view){
-        boolean login = true;
 
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
         usuario = (TextInputLayout) findViewById(R.id.edit_username);
         contrasena = (TextInputLayout) findViewById(R.id.edit_password);
 
-        if (usuario.getEditText().getText().toString() != null && contrasena.getEditText().getText().toString()!= null){
+        String nombreUsuario = usuario.getEditText().getText().toString();
+        String nombreContrasena = contrasena.getEditText().getText().toString();
+        BaseDatos baseDatos = new BaseDatos(this);
+        MainActivity mainActivity= new MainActivity();
 
-            String nombreUsuario = usuario.getEditText().getText().toString();
-            String nombreContrasena = contrasena.getEditText().getText().toString();
+        ServicioInicio servicioInicio = new ServicioInicio(nombreUsuario, nombreContrasena, this, mainActivity);
 
-            if (nombreUsuario.equals("")){
-                usuario.setError("El usuario es requerido");
-                login = false;
-            }
-            if (nombreContrasena.equals("")){
-                contrasena.setError("La contraseña es requerida");
-                login = false;
-            }
-            if (login){
-                BaseDatos baseDatos = new BaseDatos(this);
 
-                ServicioInicio servicioInicio = new ServicioInicio(nombreUsuario, nombreContrasena, this);
 
-                if (servicioInicio.confirmarUsuario(nombreUsuario, nombreContrasena, baseDatos) == 2){
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                }
-            }
+        servicioInicio.confirmarUsuario(nombreUsuario, nombreContrasena, baseDatos, mainActivity.getClass());
 
-        }
 
     }
 
@@ -88,8 +75,11 @@ public class ActivityInicio extends AppCompatActivity implements AlertaInicio.Us
         String contrasena = usuario.getContrasena();
         BaseDatos baseDatos = new BaseDatos(this);
 
+
         ServicioInicio servicioInicio = new ServicioInicio(nombre, contrasena, this);
 
+
+        servicioInicio.toast();
         servicioInicio.almacenarUsuario(nombre, contrasena, baseDatos);
     }
 
