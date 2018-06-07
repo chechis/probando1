@@ -60,8 +60,27 @@ public class ServicioDonante {
 
     }
 
-    public void modificarDonante (){
+    public void modificarDonante (int posicion, Donante donante, BaseDatos baseDatos, Activity activity){
 
+
+
+        SQLiteDatabase sq = baseDatos.getWritableDatabase();
+        ContentValues content = new ContentValues();
+
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_ID, donante.getIdentificacion());
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE, donante.getNombre());
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO, donante.getApellido());
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_EDAD, donante.getEdad());
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_TIPO, donante.getTipo().toString());
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_RH, donante.getRh().toString());
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_PESO, donante.getPeso());
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA, donante.getEstatura());
+
+        //sq.update(Estructura.EstructuraDonante.TABLE_NAME, content, null,posicion);
+
+        Toast.makeText(activity, "Se ha actualizado el donante" + donante.getNombre(), Toast.LENGTH_SHORT).show();
+
+        sq.close();
     }
 
 
