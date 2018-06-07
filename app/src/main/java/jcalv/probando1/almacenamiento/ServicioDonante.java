@@ -7,12 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import jcalv.probando1.modelo.Donante;
 
 public class ServicioDonante {
 
     private Donante donante;
     private Activity activity;
+    private ArrayList<Donante> donantes;
 
     public ServicioDonante(Donante donante, Activity activity) {
         this.donante = donante;
@@ -63,7 +66,6 @@ public class ServicioDonante {
     public void modificarDonante (int posicion, Donante donante, BaseDatos baseDatos, Activity activity){
 
 
-
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
 
@@ -76,11 +78,20 @@ public class ServicioDonante {
         content.put(Estructura.EstructuraDonante.COLUMN_NAME_PESO, donante.getPeso());
         content.put(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA, donante.getEstatura());
 
-        //sq.update(Estructura.EstructuraDonante.TABLE_NAME, content, null,posicion);
+        sq.update(Estructura.EstructuraDonante.TABLE_NAME, content, donante.getIdentificacion(), null);
 
         Toast.makeText(activity, "Se ha actualizado el donante" + donante.getNombre(), Toast.LENGTH_SHORT).show();
 
         sq.close();
+    }
+
+    public void eliminarDonante (int posicion, Donante donante, BaseDatos baseDatos, Activity activity){
+
+        SQLiteDatabase sq = baseDatos.getWritableDatabase();
+
+        sq.execSQL("DELETE FROM" + Estructura.EstructuraDonante.TABLE_NAME+ " WHERE ");
+
+
     }
 
 
