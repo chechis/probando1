@@ -20,8 +20,7 @@ public class ServicioInicio {
     private String nombre;
     private String contrasena;
     private Activity activity;
-    private Context context;
-    private MainActivity mainActivity;
+
 
     public ServicioInicio(String nombre, String contrasena, Activity activity) {
         this.nombre = nombre;
