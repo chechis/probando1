@@ -19,14 +19,14 @@ public class Estructura {
 
     public static abstract class EstructuraDonante implements BaseColumns{
         public static final String TABLE_NAME = "Donante";
-        public static final String COLUMN_NAME_ID = "Identificacion";
-        public static final String COLUMN_NAME_DONANTE = "Nombre";
-        public static final String COLUMN_NAME_APELLIDO = "Apellido";
-        public static final String COLUMN_NAME_EDAD = "Edad";
-        public static final String COLUMN_NAME_TIPO = "Tipo";
-        public static final String COLUMN_NAME_RH = "Rh";
-        public static final String COLUMN_NAME_PESO = "Peso";
-        public static final String COLUMN_NAME_ESTATURA = "Estatura";
+        public static final String COLUMN_NAME_ID = "identificacion";
+        public static final String COLUMN_NAME_DONANTE = "nombre";
+        public static final String COLUMN_NAME_APELLIDO = "apellido";
+        public static final String COLUMN_NAME_EDAD = "edad";
+        public static final String COLUMN_NAME_TIPO = "tipo";
+        public static final String COLUMN_NAME_RH = "rh";
+        public static final String COLUMN_NAME_PESO = "peso";
+        public static final String COLUMN_NAME_ESTATURA = "estatura";
     }
 
 

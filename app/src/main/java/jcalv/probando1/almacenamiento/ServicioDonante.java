@@ -87,11 +87,14 @@ public class ServicioDonante {
 
     public void eliminarDonante (int posicion, Donante donante, BaseDatos baseDatos, Activity activity){
 
+
+
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
 
-        sq.execSQL("DELETE FROM" + Estructura.EstructuraDonante.TABLE_NAME+ " WHERE ");
+        sq.delete(Estructura.EstructuraDonante.TABLE_NAME, donante.getIdentificacion(), null);
 
-
+        Toast.makeText(activity, "Se ha eliminado el producto", Toast.LENGTH_SHORT).show();
+        sq.close();
     }
 
 

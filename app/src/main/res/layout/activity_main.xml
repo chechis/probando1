@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_flotatne"
@@ -22,5 +18,21 @@
         android:src="@drawable/ic_add_black_24dp"
         android:theme="@style/MyFloatingButton"
         app:rippleColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/probando"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/btn_flotatne"
+        android:layout_marginStart="112dp"
+        android:text="Base de datos"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_donante"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

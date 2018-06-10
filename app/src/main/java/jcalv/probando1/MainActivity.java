@@ -1,26 +1,31 @@
 package jcalv.probando1;
 
-import android.content.DialogInterface;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-
-import jcalv.probando1.almacenamiento.Servicio;
+import jcalv.probando1.almacenamiento.BaseDatos;
+import jcalv.probando1.almacenamiento.BaseDatosDonantes;
+import jcalv.probando1.almacenamiento.Estructura;
+import jcalv.probando1.almacenamiento.ServicioDonante;
 import jcalv.probando1.modelo.Donante;
-import jcalv.probando1.modelo.adapter.DonanteAdapter;
+import jcalv.probando1.modelo.adapter.Adapter;
 
 public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener {
 
-    private DonanteAdapter adapter;
+    private Adapter adapter;
+    private ServicioDonante servicioDonante;
+    private BaseDatosDonantes baseDatosDonantes;
+    Context context;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,69 +33,61 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         setContentView(R.layout.activity_main);
 
 
-        FloatingActionButton btnflotatante= (FloatingActionButton) findViewById(R.id.btn_flotatne);
+        FloatingActionButton btnflotatante = (FloatingActionButton) findViewById(R.id.btn_flotatne);
         btnflotatante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertaDatos alertaDatos= new AlertaDatos();
+                AlertaDatos alertaDatos = new AlertaDatos();
                 alertaDatos.show(getSupportFragmentManager(), "alertaDatos");
             }
         });
 
+        Button boton = (Button) findViewById(R.id.probando);
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                baseDatosDonantes = new BaseDatosDonantes(getApplicationContext());
+                SQLiteDatabase sq = baseDatosDonantes.getWritableDatabase();
+                ContentValues content = new ContentValues();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        try {
-            adapter = new DonanteAdapter(this, Servicio.getInstance(this).cargarDatos(),
-                    new DonanteAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(DonanteAdapter.DonanteViewHolder holder, int position) {
-                            confirmacion(position);
-                        }
-                    });
-        }catch (IOException e){
-            Toast.makeText(this, "Error al cargar el archivo 1", Toast.LENGTH_SHORT).show();
-        }catch (ClassNotFoundException e){
-            Toast.makeText(this, "Error al cargar la lista 2", Toast.LENGTH_SHORT).show();
-        }
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_ID, "2");
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE, "Julio");
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO, "Alvarez");
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_EDAD, "25");
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_TIPO, "O");
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_RH, "-");
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_PESO, "70");
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA, "168");
+                sq.insert(Estructura.EstructuraDonante.TABLE_NAME, null, content);
+
+                Toast.makeText(MainActivity.this, "Usuario ha sido guardado", Toast.LENGTH_SHORT).show();
+
+                //Adapter adapter = new Adapter(getApplicationContext());
+                //recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
+                //recyclerView.setAdapter(adapter);
+                //recyclerView.setHasFixedSize(true);
+                //recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
+            }
+        });
+
+
+
+
+
     }
 
-    public void confirmacion(final int position){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("¿Está seguro de que desea eliminar el elemento?")
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            Servicio.getInstance(MainActivity.this).eliminar(position);
-                        } catch (IOException e) {
-                            Toast.makeText(MainActivity.this, "Error al actualizar el archivo", Toast.LENGTH_SHORT).show();
-                        } catch (ClassNotFoundException e) {
-                            Toast.makeText(MainActivity.this, "Error al eliminar el elemento", Toast.LENGTH_SHORT).show();
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                }).create().show();
-    }
+
 
     @Override
     public void agregarDonante(Donante donante) {
-        try{
-            Servicio.getInstance(this).guardarDonante(donante);
-        }catch (IOException e){
-            Toast.makeText(this, "Error al actualizar el archivo 3", Toast.LENGTH_SHORT).show();
-        }catch (ClassNotFoundException e){
-            Toast.makeText(this, "Error al guardar elemento en la lista 4", Toast.LENGTH_SHORT).show();
-        }
-        adapter.notifyDataSetChanged();
+
+        //servicioDonante= new ServicioDonante(donante, this);
+
+        //servicioDonante.guardarDonante(donante, baseDatos, this);
+
+
 
 
     }
