@@ -12,16 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import jcalv.probando1.almacenamiento.BaseDatos;
 import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
 import jcalv.probando1.almacenamiento.ServicioDonante;
 import jcalv.probando1.modelo.Donante;
-import jcalv.probando1.modelo.adapter.Adapter;
+import jcalv.probando1.modelo.adapter.Adaptador;
 
 public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener {
 
-    private Adapter adapter;
+    private Adaptador adapter;
     private ServicioDonante servicioDonante;
     private BaseDatosDonantes baseDatosDonantes;
     Context context;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
                 SQLiteDatabase sq = baseDatosDonantes.getWritableDatabase();
                 ContentValues content = new ContentValues();
 
-                content.put(Estructura.EstructuraDonante.COLUMN_NAME_ID, "2");
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI, "2");
                 content.put(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE, "Julio");
                 content.put(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO, "Alvarez");
                 content.put(Estructura.EstructuraDonante.COLUMN_NAME_EDAD, "25");
@@ -62,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
 
                 Toast.makeText(MainActivity.this, "Usuario ha sido guardado", Toast.LENGTH_SHORT).show();
 
-                //Adapter adapter = new Adapter(getApplicationContext());
-                //recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
-                //recyclerView.setAdapter(adapter);
-                //recyclerView.setHasFixedSize(true);
-                //recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                Adaptador adapter = new Adaptador(getApplicationContext());
+                recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
 
             }
@@ -83,9 +82,11 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
     @Override
     public void agregarDonante(Donante donante) {
 
-        //servicioDonante= new ServicioDonante(donante, this);
+        BaseDatosDonantes baseDatosDonantes= new BaseDatosDonantes(context);
 
-        //servicioDonante.guardarDonante(donante, baseDatos, this);
+        servicioDonante= new ServicioDonante(donante, this);
+
+        servicioDonante.guardarDonante(donante, baseDatosDonantes, this);
 
 
 

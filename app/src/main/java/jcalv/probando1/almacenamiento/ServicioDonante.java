@@ -15,7 +15,7 @@ public class ServicioDonante {
 
     private Donante donante;
     private Activity activity;
-    private ArrayList<Donante> donantes;
+
 
     public ServicioDonante(Donante donante, Activity activity) {
         this.donante = donante;
@@ -24,7 +24,7 @@ public class ServicioDonante {
 
 
 
-    public void guardarDonante (Donante donante, BaseDatos baseDatos, Activity activity){
+    public void guardarDonante (Donante donante, BaseDatosDonantes baseDatos, Activity activity){
         int aux = 0;
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
@@ -35,7 +35,7 @@ public class ServicioDonante {
                 do {
                     Log.i("AG", cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE)));
 
-                    comparador = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_ID));
+                    comparador = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI));
                     if (comparador.equals(donante.getIdentificacion())){
                         aux = 1;
                     }
@@ -46,7 +46,7 @@ public class ServicioDonante {
                 Toast.makeText(activity, "El donante ya existe", Toast.LENGTH_LONG).show();
 
             }else {
-                content.put(Estructura.EstructuraDonante.COLUMN_NAME_ID, donante.getIdentificacion());
+                content.put(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI, donante.getIdentificacion());
                 content.put(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE, donante.getNombre());
                 content.put(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO, donante.getApellido());
                 content.put(Estructura.EstructuraDonante.COLUMN_NAME_EDAD, donante.getEdad());
@@ -69,7 +69,7 @@ public class ServicioDonante {
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
 
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_ID, donante.getIdentificacion());
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI, donante.getIdentificacion());
         content.put(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE, donante.getNombre());
         content.put(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO, donante.getApellido());
         content.put(Estructura.EstructuraDonante.COLUMN_NAME_EDAD, donante.getEdad());

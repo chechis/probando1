@@ -21,25 +21,31 @@ import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
 import jcalv.probando1.modelo.Donante;
 
-public class Adapter extends RecyclerView.Adapter<DonanteViewHolder>{
+public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
 
     BaseDatosDonantes baseDatos;
-    ArrayList<String> id, donantes, apellidos, edad, estaturas, pesos, rh, tipos;
+    ArrayList<String> id = new ArrayList<String>();
+    ArrayList<String> donantes = new ArrayList<String>();
+    ArrayList<String> apellidos = new ArrayList<String>();
+    ArrayList<String> edad = new ArrayList<String>();
+    ArrayList<String> estaturas = new ArrayList<String>();
+    ArrayList<String> pesos = new ArrayList<String>();
+    ArrayList<String> rh = new ArrayList<String>();
+    ArrayList<String> tipos = new ArrayList<String>();
     LayoutInflater inflater;
     Context context;
 
-    public Adapter(Context context) {
+    public Adaptador(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
 
         baseDatos = new BaseDatosDonantes(context);
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         Cursor c = sq.rawQuery("SELECT * FROM " + Estructura.EstructuraDonante.TABLE_NAME, null);
-        int a = 0;
 
         if (c.moveToFirst()){
             do {
-                id.add(c.getString(c.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_ID)));
+                id.add(c.getString(c.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI)));
                 donantes.add(c.getString(c.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE)));
                 apellidos.add(c.getString(c.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO)));
                 edad.add(c.getString(c.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_EDAD)));
@@ -48,7 +54,6 @@ public class Adapter extends RecyclerView.Adapter<DonanteViewHolder>{
                 rh.add(c.getString(c.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_RH)));
                 tipos.add(c.getString(c.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_TIPO)));
 
-                //a++;
             }while (c.moveToNext());
         }
     }
