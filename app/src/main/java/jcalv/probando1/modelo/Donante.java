@@ -8,7 +8,7 @@ public class Donante implements Serializable{
         A, B, O, AB
     }
     public enum Rh{
-        positivo, negativo
+        Positivo, Negativo
     }
 
     private String identificacion;

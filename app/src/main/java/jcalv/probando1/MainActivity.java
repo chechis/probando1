@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.IOException;
 
 import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
@@ -31,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         FloatingActionButton btnflotatante = (FloatingActionButton) findViewById(R.id.btn_flotatne);
         btnflotatante.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                baseDatosDonantes = new BaseDatosDonantes(getApplicationContext());
+                baseDatosDonantes = new BaseDatosDonantes(MainActivity.this);
                 SQLiteDatabase sq = baseDatosDonantes.getWritableDatabase();
                 ContentValues content = new ContentValues();
 
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
                 content.put(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA, "168");
                 sq.insert(Estructura.EstructuraDonante.TABLE_NAME, null, content);
 
-                Toast.makeText(MainActivity.this, "Usuario ha sido guardado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Usuario eliminado", Toast.LENGTH_SHORT).show();
 
                 Adaptador adapter = new Adaptador(getApplicationContext());
                 recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
@@ -67,13 +69,15 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-
             }
         });
 
 
-
-
+        Adaptador adapter = new Adaptador(getApplicationContext());
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
     }
 
@@ -82,14 +86,27 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
     @Override
     public void agregarDonante(Donante donante) {
 
-        BaseDatosDonantes baseDatosDonantes= new BaseDatosDonantes(context);
+         String identificacion = donante.getIdentificacion();
+         String nombre = donante.getNombre();
+         String apellido = donante.getApellido();
+         String edad = donante.getEdad();
+         String tipo = donante.getTipo().toString();
+         String rh = donante.getRh().toString();
+         String peso = donante.getPeso();
+         String estatura = donante.getEstatura();
+
+
+        BaseDatosDonantes baseDatosDonantes= new BaseDatosDonantes(this);
 
         servicioDonante= new ServicioDonante(donante, this);
+        servicioDonante.guardarDonante(identificacion, nombre, apellido, edad, tipo, rh, peso, estatura,
+                baseDatosDonantes, this);
 
-        servicioDonante.guardarDonante(donante, baseDatosDonantes, this);
-
-
-
+        Adaptador adapter = new Adaptador(getApplicationContext());
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
     }
 }

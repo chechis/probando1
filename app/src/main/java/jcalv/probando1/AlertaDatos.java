@@ -110,13 +110,13 @@ public class AlertaDatos extends DialogFragment{
                     break;
             }
 
-            Donante.Rh rh = Donante.Rh.positivo;
-            switch (spnTipo.getSelectedItemPosition()){
+            Donante.Rh rh = Donante.Rh.Positivo;
+            switch (spnRh.getSelectedItemPosition()){
                 case 0:
-                    rh = Donante.Rh.positivo;
+                    rh = Donante.Rh.Positivo;
                     break;
                 case 1:
-                    rh = Donante.Rh.negativo;
+                    rh = Donante.Rh.Negativo;
                     break;
             }
 

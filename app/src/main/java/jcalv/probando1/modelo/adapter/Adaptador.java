@@ -1,6 +1,7 @@
 package jcalv.probando1.modelo.adapter;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,6 +20,7 @@ import jcalv.probando1.R;
 import jcalv.probando1.almacenamiento.BaseDatos;
 import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
+import jcalv.probando1.almacenamiento.ServicioDonante;
 import jcalv.probando1.modelo.Donante;
 
 public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
@@ -32,6 +34,7 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
     ArrayList<String> pesos = new ArrayList<String>();
     ArrayList<String> rh = new ArrayList<String>();
     ArrayList<String> tipos = new ArrayList<String>();
+    ArrayList<Integer> auxi = new ArrayList<Integer>();
     LayoutInflater inflater;
     Context context;
 
@@ -68,6 +71,8 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
     @Override
     public void onBindViewHolder(DonanteViewHolder holder, final int position) {
 
+        auxi.add(position);
+
         holder.txtNombre.setText(donantes.get(position));
         holder.txtApellido.setText(apellidos.get(position));
         holder.txtId.setText("Identificacion  " + id.get(position));
@@ -83,7 +88,9 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "hola"+position, Toast.LENGTH_SHORT).show();
+                ServicioDonante servicioDonante = new ServicioDonante(position);
+                servicioDonante.eliminarDonante(position, auxi.get(position), baseDatos, context);
+                //Toast.makeText(context, "hola"+posicion, Toast.LENGTH_SHORT).show();
             }
         });
 
