@@ -2,15 +2,17 @@ package jcalv.probando1.modelo;
 
 import java.io.Serializable;
 
-public class Donante implements Serializable{
+public class Donante implements Serializable {
 
-    public enum Tipo{
+    public enum Tipo {
         A, B, O, AB
     }
-    public enum Rh{
+
+    public enum Rh {
         Positivo, Negativo
     }
 
+    private int id;
     private String identificacion;
     private String nombre;
     private String apellido;
@@ -20,8 +22,8 @@ public class Donante implements Serializable{
     private String peso;
     private String estatura;
 
-    public Donante(String identificacion, String nombre, String apellido, String edad,
-                   Tipo tipo, Rh rh, String peso, String estatura) {
+    public Donante(int id, String identificacion, String nombre, String apellido, String edad, Tipo tipo, Rh rh, String peso, String estatura) {
+        this.id = id;
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -30,6 +32,14 @@ public class Donante implements Serializable{
         this.rh = rh;
         this.peso = peso;
         this.estatura = estatura;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getIdentificacion() {
@@ -96,3 +106,5 @@ public class Donante implements Serializable{
         this.estatura = estatura;
     }
 }
+
+

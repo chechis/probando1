@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.List;
 
 import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
@@ -21,13 +22,15 @@ import jcalv.probando1.almacenamiento.ServicioDonante;
 import jcalv.probando1.modelo.Donante;
 import jcalv.probando1.modelo.adapter.Adaptador;
 
-public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener {
+public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener, Adaptador.OnEventDonanteListener {
 
     private Adaptador adapter;
     private ServicioDonante servicioDonante;
     private BaseDatosDonantes baseDatosDonantes;
+    private SQLiteDatabase myDatabase;
     Context context;
     RecyclerView recyclerView;
+    private List<Donante> donantess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +110,19 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+    }
+
+    @Override
+    public void deleteDonante(int position) {
+        Donante donante = donantess.get(position);
+        myDatabase.execSQL("DELETE FROM "+Estructura.EstructuraDonante.TABLE_NAME+ " WHERE ID=?", new  Object[]{donante.getId()});
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void editarDonante(int position) {
 
     }
 }
