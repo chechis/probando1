@@ -7,9 +7,14 @@ public class Donante implements Serializable {
     public enum Tipo {
         A, B, O, AB
     }
+<<<<<<< HEAD
 
     public enum Rh {
         Positivo, Negativo
+=======
+    public enum Rh{
+        positivo, negativo
+>>>>>>> parent of 8f9f66d... adapter para borrar
     }
 
     private int id;

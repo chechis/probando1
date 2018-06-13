@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class BaseDatosDonantes extends SQLiteOpenHelper {
 
     private static final String tipo = " TEXT";
-    private static final String numero= " LONG";
     private static final String coma = ",";
 
     private static final String Sentencia =
@@ -23,7 +22,7 @@ public class BaseDatosDonantes extends SQLiteOpenHelper {
                       Estructura.EstructuraDonante.COLUMN_NAME_PESO + tipo + coma +
                     Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA + tipo + " )";
 
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "ListaDonantes.sqLite";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + Estructura.EstructuraDonante.TABLE_NAME;
