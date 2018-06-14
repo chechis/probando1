@@ -12,25 +12,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import java.io.IOException;
 import java.util.List;
 
-=======
->>>>>>> parent of 8f9f66d... adapter para borrar
-=======
->>>>>>> parent of 8f9f66d... adapter para borrar
-=======
->>>>>>> parent of 8f9f66d... adapter para borrar
+
 import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
 import jcalv.probando1.almacenamiento.ServicioDonante;
 import jcalv.probando1.modelo.Donante;
 import jcalv.probando1.modelo.adapter.Adaptador;
 
-public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener, Adaptador.OnEventDonanteListener {
+public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener {
 
     private Adaptador adapter;
     private ServicioDonante servicioDonante;
@@ -85,60 +78,30 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
             }
         });
 
-
-
-
-
     }
-
 
 
     @Override
     public void agregarDonante(Donante donante) {
 
-        BaseDatosDonantes baseDatosDonantes= new BaseDatosDonantes(context);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
+        String identificacion = donante.getIdentificacion();
+        String nombre = donante.getNombre();
+        String apellido = donante.getApellido();
+        String edad = donante.getEdad();
+        String tipo = donante.getTipo().toString();
+        String rh = donante.getRh().toString();
+        String peso = donante.getPeso();
+        String estatura = donante.getEstatura();
 
-        servicioDonante= new ServicioDonante(donante, this);
+        BaseDatosDonantes baseDatosDonantes = new BaseDatosDonantes(this);
+        servicioDonante = new ServicioDonante(donante, this);
+        servicioDonante.guardarDonante(identificacion, nombre, apellido,
+                edad, tipo, rh, peso, estatura, baseDatosDonantes, this);
 
-        servicioDonante.guardarDonante(donante, baseDatosDonantes, this);
->>>>>>> parent of 8f9f66d... adapter para borrar
-
-        servicioDonante= new ServicioDonante(donante, this);
-
-<<<<<<< HEAD
-        servicioDonante.guardarDonante(donante, baseDatosDonantes, this);
->>>>>>> parent of 8f9f66d... adapter para borrar
-
-        servicioDonante= new ServicioDonante(donante, this);
-
-<<<<<<< HEAD
-        servicioDonante.guardarDonante(donante, baseDatosDonantes, this);
-
-
-
-
-    }
-
-    @Override
-    public void deleteDonante(int position) {
-        Donante donante = donantess.get(position);
-        myDatabase.execSQL("DELETE FROM "+Estructura.EstructuraDonante.TABLE_NAME+ " WHERE ID=?", new  Object[]{donante.getId()});
-        adapter.notifyDataSetChanged();
-
-    }
-
-    @Override
-    public void editarDonante(int position) {
-=======
-
->>>>>>> parent of 8f9f66d... adapter para borrar
-=======
-
->>>>>>> parent of 8f9f66d... adapter para borrar
-
+        Adaptador adapter = new Adaptador(getApplicationContext());
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 }

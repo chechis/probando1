@@ -4,15 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Movie;
-import android.media.MediaDrm;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -25,8 +20,8 @@ import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
 import jcalv.probando1.modelo.Donante;
 
-<<<<<<< HEAD
-public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder> implements CompoundButton.OnClickListener{
+
+public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder> {
 
     private BaseDatosDonantes baseDatos;
     private ArrayList<String> identificacion = new ArrayList<String>();
@@ -37,34 +32,10 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder> implement
     private ArrayList<String> pesos = new ArrayList<String>();
     private ArrayList<String> rh = new ArrayList<String>();
     private ArrayList<String> tipos = new ArrayList<String>();
-    private ArrayList<Integer> auxi = new ArrayList<Integer>();
     private LayoutInflater inflater;
     private Context context;
 
-    private List<Donante> donantess;
-    private OnEventDonanteListener onEventDonanteListener;
-    public interface OnEventDonanteListener {
 
-        void deleteDonante (int position);
-        void editarDonante (int position);
-
-    }
-
-=======
-public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
-
-    BaseDatosDonantes baseDatos;
-    ArrayList<String> id = new ArrayList<String>();
-    ArrayList<String> donantes = new ArrayList<String>();
-    ArrayList<String> apellidos = new ArrayList<String>();
-    ArrayList<String> edad = new ArrayList<String>();
-    ArrayList<String> estaturas = new ArrayList<String>();
-    ArrayList<String> pesos = new ArrayList<String>();
-    ArrayList<String> rh = new ArrayList<String>();
-    ArrayList<String> tipos = new ArrayList<String>();
-    LayoutInflater inflater;
-    Context context;
->>>>>>> parent of 8f9f66d... adapter para borrar
 
     public Adaptador(Context context) {
         this.context = context;
@@ -97,19 +68,8 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(DonanteViewHolder holder, int position) {
+    public void onBindViewHolder(DonanteViewHolder holder,final int position) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        Donante donante = donantess.get(position);
-
-=======
->>>>>>> parent of 8f9f66d... adapter para borrar
-=======
->>>>>>> parent of 8f9f66d... adapter para borrar
-=======
->>>>>>> parent of 8f9f66d... adapter para borrar
         holder.txtNombre.setText(donantes.get(position));
         holder.txtApellido.setText(apellidos.get(position));
         holder.txtId.setText("Identificacion  " + identificacion.get(position));
@@ -125,21 +85,13 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                 //ServicioDonante servicioDonante = new ServicioDonante(position);
                 //servicioDonante.eliminarDonante(position, auxi.get(position), baseDatos, context);
                 //Toast.makeText(context, "hola"+posicion, Toast.LENGTH_SHORT).show();
-=======
+
                 Toast.makeText(context, "hola"+position, Toast.LENGTH_SHORT).show();
->>>>>>> parent of 8f9f66d... adapter para borrar
-=======
-                Toast.makeText(context, "hola"+position, Toast.LENGTH_SHORT).show();
->>>>>>> parent of 8f9f66d... adapter para borrar
-=======
-                Toast.makeText(context, "hola"+position, Toast.LENGTH_SHORT).show();
->>>>>>> parent of 8f9f66d... adapter para borrar
+
             }
         });
 
@@ -150,25 +102,5 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
         return identificacion.size();
     }
 
-    @Override
-    public void onClick(View view) {
-        if (onEventDonanteListener != null){
 
-            onEventDonanteListener.deleteDonante(getAdapterPosition());
-            onEventDonanteListener.editarDonante(getAdapterPosition());
-
-        }
-    }
-
-    public Adaptador(List<Donante> donantess) {
-        this.donantess = donantess;
-    }
-
-    public OnEventDonanteListener getOnEventDonanteListener() {
-        return onEventDonanteListener;
-    }
-
-    public void setOnEventDonanteListener (OnEventDonanteListener onEventDonanteListener){
-        this.onEventDonanteListener = onEventDonanteListener;
-    }
 }
