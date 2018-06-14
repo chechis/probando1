@@ -9,17 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:label="@string/donante_tool">
-
-        </activity>
-        <activity android:name=".inicio.ActivityInicio"
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/donante_tool"></activity>
+        <activity
+            android:name=".inicio.ActivityInicio"
             android:label="@string/donantes_tool">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".intento.Main2Activity"></activity>
     </application>
 
 </manifest>

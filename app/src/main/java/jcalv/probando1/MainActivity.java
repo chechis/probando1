@@ -2,6 +2,7 @@ package jcalv.probando1;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
@@ -22,11 +23,12 @@ import java.util.List;
 import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
 import jcalv.probando1.almacenamiento.ServicioDonante;
+import jcalv.probando1.intento.Main2Activity;
 import jcalv.probando1.modelo.Donante;
 import jcalv.probando1.modelo.adapter.Adaptador;
 import jcalv.probando1.modelo.adapter.AdaptadorBorrar;
 
-public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener, AdaptadorBorrar.DonanteListener{
+public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener{
 
     private ServicioDonante servicioDonante;
     private BaseDatosDonantes baseDatosDonantes;
@@ -41,15 +43,7 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listaDonantes = new ArrayList<>();
-        actualizarLista();
 
-        adaptadorBorrar = new AdaptadorBorrar(listaDonantes);
-        adaptadorBorrar.setDonanteListener(this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
-        recyclerView.setAdapter(adaptadorBorrar);
 
 
         FloatingActionButton btnflotatante = (FloatingActionButton) findViewById(R.id.btn_flotatne);
@@ -61,6 +55,15 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
             }
         });
 
+
+        Button btnIntento = (Button) findViewById(R.id.btn_intento);
+        btnIntento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                startActivity(intent);
+            }
+        });
         Button boton = (Button) findViewById(R.id.probando);
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,38 +84,14 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
 
                 Toast.makeText(MainActivity.this, "Usuario ha sido guardado", Toast.LENGTH_SHORT).show();
 
-                //Adaptador adapter = new Adaptador(getApplicationContext());
-                //adaptadorBorrar = new AdaptadorBorrar(listaDonantes);
-                //adaptadorBorrar.setDonanteListener();
-                //recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
-                //recyclerView.setAdapter(adaptadorBorrar);
-                //recyclerView.setHasFixedSize(true);
-                //recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
+                Adaptador adapter = new Adaptador(getApplicationContext());
+                recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             }
         });
-
     }
-
-    private void actualizarLista (){
-        Cursor cursor = myDatabase.rawQuery("SELECT * FROM "+ Estructura.EstructuraBase.TABLE_NAME, null);
-        listaDonantes.clear();
-        if (cursor.moveToFirst()){
-            do {
-                int id = cursor.getInt(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_ID));
-                String identificacion = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI));
-                String nombre = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE));
-                String apellido = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO));
-                String edad = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_EDAD));
-                String tipo = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_TIPO));
-                String rh = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_RH));
-                String peso = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_PESO));
-                String estatura = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA));
-                listaDonantes.add(new Donante(id, identificacion, nombre, apellido, edad, tipo, rh, peso, estatura));
-            }while (cursor.moveToNext());
-        }
-    }
-
 
     @Override
     public void agregarDonante(Donante donante) {
@@ -138,12 +117,4 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 
-    @Override
-    public void deleteDonante(int position) {
-        Donante donante = listaDonantes.get(position);
-        myDatabase.execSQL("DELETE FROM "+ Estructura.EstructuraDonante.TABLE_NAME+" WHERE ID=?;", new Object[]{donante.getId()});
-        actualizarLista();
-        adaptadorBorrar.notifyDataSetChanged();
-        Toast.makeText(this, "Se ha eliminado el donante", Toast.LENGTH_SHORT).show();
-    }
 }

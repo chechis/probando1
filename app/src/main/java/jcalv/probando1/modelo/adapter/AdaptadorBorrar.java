@@ -20,12 +20,13 @@ public class AdaptadorBorrar extends RecyclerView.Adapter<AdaptadorBorrar.Adapta
     private DonanteListener donanteListener;
     public interface DonanteListener{
         void deleteDonante(int position);
+        void editarDonante(int position);
     }
 
     public class AdaptadorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView txtNombre, txtApellido, txtIdenti, txtEdad, txtTipo, txtRh, txtPeso, txtEstatura;
-        ImageButton btnBorrar;
+        ImageButton btnBorrar, btnEditar;
 
         public AdaptadorViewHolder(View itemView) {
             super(itemView);
@@ -41,11 +42,21 @@ public class AdaptadorBorrar extends RecyclerView.Adapter<AdaptadorBorrar.Adapta
 
             btnBorrar = (ImageButton) itemView.findViewById(R.id.btn_delete);
             btnBorrar.setOnClickListener(this);
+            btnEditar = (ImageButton) itemView.findViewById(R.id.btn_edit);
+            btnEditar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (donanteListener != null){
+                        donanteListener.editarDonante(getAdapterPosition());
+                    }
+                }
+            });
         }
         @Override
         public void onClick(View view) {
             if (donanteListener != null){
                 donanteListener.deleteDonante(getAdapterPosition());
+
             }
         }
     }
