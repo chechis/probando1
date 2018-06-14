@@ -12,7 +12,7 @@ public class BaseDatosDonantes extends SQLiteOpenHelper {
 
     private static final String Sentencia =
             "CREATE TABLE " + Estructura.EstructuraDonante.TABLE_NAME + " ("
-                    + Estructura.EstructuraDonante._ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + Estructura.EstructuraDonante.COLUMN_NAME_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + Estructura.EstructuraDonante.COLUMN_NAME_IDENTI + tipo + coma +
                       Estructura.EstructuraDonante.COLUMN_NAME_DONANTE + tipo + coma +
                       Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO + tipo + coma +

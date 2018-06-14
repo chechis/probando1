@@ -18,7 +18,9 @@ public class Estructura {
     }
 
     public static abstract class EstructuraDonante implements BaseColumns{
+
         public static final String TABLE_NAME = "Donante";
+        public static final String COLUMN_NAME_ID = "Id";
         public static final String COLUMN_NAME_IDENTI = "identificacion";
         public static final String COLUMN_NAME_DONANTE = "nombre";
         public static final String COLUMN_NAME_APELLIDO = "apellido";

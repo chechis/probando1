@@ -23,6 +23,47 @@ public class Donante {
     private String peso;
     private String estatura;
 
+
+    public Donante(int id, String identificacion, String nombre, String apellido, String edad, String tipoTexto, String rhTexto, String peso, String estatura) {
+        this.identificacion = identificacion;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.peso = peso;
+        this.estatura = estatura;
+        this.id = id;
+        this.rhTexto = rhTexto;
+        this.tipoTexto = tipoTexto;
+    }
+
+    private int id;
+    private String rhTexto;
+    private String tipoTexto;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRhTexto() {
+        return rhTexto;
+    }
+
+    public void setRhTexto(String rhTexto) {
+        this.rhTexto = rhTexto;
+    }
+
+    public String getTipoTexto() {
+        return tipoTexto;
+    }
+
+    public void setTipoTexto(String tipoTexto) {
+        this.tipoTexto = tipoTexto;
+    }
+
     public Donante(String identificacion, String nombre, String apellido, String edad, Tipo tipo, Rh rh, String peso, String estatura) {
         this.identificacion = identificacion;
         this.nombre = nombre;
