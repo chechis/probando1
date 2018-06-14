@@ -14,9 +14,12 @@ import android.widget.Toast;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.io.IOException;
 import java.util.List;
 
+=======
+>>>>>>> parent of 8f9f66d... adapter para borrar
 =======
 >>>>>>> parent of 8f9f66d... adapter para borrar
 =======
@@ -95,10 +98,18 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
 
         BaseDatosDonantes baseDatosDonantes= new BaseDatosDonantes(context);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 =======
 
         servicioDonante= new ServicioDonante(donante, this);
 
+        servicioDonante.guardarDonante(donante, baseDatosDonantes, this);
+>>>>>>> parent of 8f9f66d... adapter para borrar
+
+        servicioDonante= new ServicioDonante(donante, this);
+
+<<<<<<< HEAD
         servicioDonante.guardarDonante(donante, baseDatosDonantes, this);
 >>>>>>> parent of 8f9f66d... adapter para borrar
 
@@ -122,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
 
     @Override
     public void editarDonante(int position) {
+=======
+
+>>>>>>> parent of 8f9f66d... adapter para borrar
 =======
 
 >>>>>>> parent of 8f9f66d... adapter para borrar

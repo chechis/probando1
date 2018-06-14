@@ -101,8 +101,11 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         Donante donante = donantess.get(position);
 
+=======
+>>>>>>> parent of 8f9f66d... adapter para borrar
 =======
 >>>>>>> parent of 8f9f66d... adapter para borrar
 =======
@@ -124,9 +127,13 @@ public class Adaptador extends RecyclerView.Adapter<DonanteViewHolder>{
             public void onClick(View view) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 //ServicioDonante servicioDonante = new ServicioDonante(position);
                 //servicioDonante.eliminarDonante(position, auxi.get(position), baseDatos, context);
                 //Toast.makeText(context, "hola"+posicion, Toast.LENGTH_SHORT).show();
+=======
+                Toast.makeText(context, "hola"+position, Toast.LENGTH_SHORT).show();
+>>>>>>> parent of 8f9f66d... adapter para borrar
 =======
                 Toast.makeText(context, "hola"+position, Toast.LENGTH_SHORT).show();
 >>>>>>> parent of 8f9f66d... adapter para borrar
