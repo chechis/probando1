@@ -65,7 +65,7 @@ public class ServicioDonante {
 
     }
 
-    public void modificarDonante (int posicion, Donante donante, BaseDatos baseDatos, Activity activity){
+    public void modificarDonante (int posicion, Donante donante, BaseDatosDonantes baseDatos, Activity activity){
 
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
@@ -88,7 +88,6 @@ public class ServicioDonante {
     }
 
     public void eliminarDonante (int posicion, Donante donante, BaseDatos baseDatos, Activity activity){
-
 
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
