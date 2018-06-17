@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/donante_tool"></activity>
+            android:label="@string/donante_tool"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".inicio.ActivityInicio"
             android:label="@string/donantes_tool">
@@ -21,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".intento.Main2Activity"></activity>
     </application>
 
 </manifest>

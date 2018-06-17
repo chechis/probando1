@@ -1,20 +1,22 @@
 package jcalv.probando1;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 
 
 import java.util.ArrayList;
@@ -24,7 +26,6 @@ import java.util.List;
 import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
 import jcalv.probando1.almacenamiento.ServicioDonante;
-import jcalv.probando1.intento.Main2Activity;
 import jcalv.probando1.modelo.Donante;
 
 import jcalv.probando1.modelo.adapter.AdaptadorBorrar;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         listaDonantes = new ArrayList<>();
         final EditText editText = (EditText) findViewById(R.id.txt_buscar);
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
 
 
     }
+
 
     private void actualizarLista (){
         BaseDatosDonantes baseDatosDonantes = new BaseDatosDonantes(this);
@@ -147,12 +152,28 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
 
     @Override
     public void deleteDonante(int position) {
-        BaseDatosDonantes baseDatosDonantes = new BaseDatosDonantes(this);
-        Donante donante = listaDonantes.get(position);
-        ServicioDonante servicioDonante = new ServicioDonante(donante, this);
-        servicioDonante.eliminarDonante(donante, baseDatosDonantes, this);
-        actualizarLista();
-        adaptadorBorrar.notifyDataSetChanged();
+
+        final int posicion = position;
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("¿Está seguro de que desea eliminar el donante?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        BaseDatosDonantes baseDatosDonantes = new BaseDatosDonantes(MainActivity.this);
+                        Donante donante = listaDonantes.get(posicion);
+                        ServicioDonante servicioDonante = new ServicioDonante(donante, MainActivity.this);
+                        servicioDonante.eliminarDonante(donante, baseDatosDonantes, MainActivity.this);
+                        actualizarLista();
+                        adaptadorBorrar.notifyDataSetChanged();
+
+                    }
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).create().show();
 
     }
 
@@ -205,5 +226,30 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         actualizarLista();
         adaptadorBorrar.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id==R.id.elimar_cuenta){
+
+        }
+        if (id==R.id.cambiar){
+
+        }
+
+        if (id== R.id.cerrar){
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }

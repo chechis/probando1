@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/cambiar"
+        android:title="Cambiar contraseña"/>
+    <item
+        android:id="@+id/elimar_cuenta"
+        android:title="Eliminar Cuenta"/>
+    <item
+        android:id="@+id/cerrar"
+        android:title="Cerrar sesión"/>
+
+</menu>
