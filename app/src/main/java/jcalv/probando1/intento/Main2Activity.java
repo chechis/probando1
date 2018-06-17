@@ -156,7 +156,7 @@ public class Main2Activity extends AppCompatActivity implements AdaptadorBorrar.
         String peso = donante.getPeso();
         String estatura = donante.getEstatura();
 
-        //, NOMBRE, APELLIDO, EDAD, TIPO, RH, PESO, ESTATURA
+
         String comparador = "ID LIKE " + id;
         ContentValues values = new ContentValues();
         values.put("NOMBRE", nombre);

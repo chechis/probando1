@@ -79,12 +79,12 @@ public class AdaptadorBorrar extends RecyclerView.Adapter<AdaptadorBorrar.Adapta
 
         holder.txtNombre.setText(donante.getNombre());
         holder.txtApellido.setText(donante.getApellido());
-        holder.txtIdenti.setText(donante.getIdentificacion());
-        holder.txtEdad.setText(donante.getEdad());
-        holder.txtPeso.setText(donante.getPeso());
-        holder.txtEstatura.setText(donante.getEstatura());
-        holder.txtRh.setText(donante.getRhTexto());
-        holder.txtTipo.setText(donante.getTipoTexto());
+        holder.txtIdenti.setText("Identificación "+ donante.getIdentificacion());
+        holder.txtEdad.setText("Edad "+ donante.getEdad()+" años");
+        holder.txtPeso.setText("Peso "+ donante.getPeso()+" Kg");
+        holder.txtEstatura.setText("Estatura "+ donante.getEstatura()+" cm");
+        holder.txtRh.setText("RH "+ donante.getRhTexto());
+        holder.txtTipo.setText("Tipo "+ donante.getTipoTexto());
     }
 
     @Override

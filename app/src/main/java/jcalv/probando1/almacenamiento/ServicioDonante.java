@@ -65,41 +65,41 @@ public class ServicioDonante {
 
     }
 
-    public void modificarDonante (int posicion, Donante donante, BaseDatosDonantes baseDatos, Activity activity){
+    public void modificarDonante (int id, String nombre, String apellido, String edad, String tipo,
+                                  String rh, String peso, String estatura, BaseDatosDonantes baseDatos, Activity activity){
 
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
+        String comparador = Estructura.EstructuraDonante.COLUMN_NAME_ID +" LIKE "+ id;
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE, nombre);
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO, apellido);
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_EDAD, edad);
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_TIPO, tipo);
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_RH, rh);
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_PESO, peso);
+        content.put(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA, estatura);
 
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI, donante.getIdentificacion());
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE, donante.getNombre());
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO, donante.getApellido());
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_EDAD, donante.getEdad());
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_TIPO, donante.getTipo().toString());
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_RH, donante.getRh().toString());
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_PESO, donante.getPeso());
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA, donante.getEstatura());
+        sq.update(Estructura.EstructuraDonante.TABLE_NAME, content, comparador, null);
 
-        sq.update(Estructura.EstructuraDonante.TABLE_NAME, content, donante.getIdentificacion(), null);
-
-        Toast.makeText(activity, "Se ha actualizado el donante" + donante.getNombre(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Se ha actualizado el donante  " + nombre, Toast.LENGTH_SHORT).show();
 
         sq.close();
     }
 
-    public void eliminarDonante (int posicion, Donante donante, BaseDatos baseDatos, Activity activity){
-
+    public void eliminarDonante (Donante donante, BaseDatosDonantes baseDatos, Activity activity){
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
 
-        sq.delete(Estructura.EstructuraDonante.TABLE_NAME, donante.getIdentificacion(), null);
+        sq.execSQL("DELETE FROM "+ Estructura.EstructuraDonante.TABLE_NAME+" WHERE ID=?;",
+                new Object[]{donante.getId()});
 
-        Toast.makeText(activity, "Se ha eliminado el producto", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Se ha eliminado el donante", Toast.LENGTH_SHORT).show();
         sq.close();
     }
 
+    public void buscarDonante (String identificacion, BaseDatosDonantes baseDatos, Activity activity){
 
-
-
+    }
 
 }

@@ -13,6 +13,7 @@
     <string name="donantes_tool">Control de Donantes</string>
     <string name="donante_tool">Donantes</string>
     <string name="no_identificacion">No. Identificacion</string>
+    <string name="id_del_donante_a_buscar">Id del donante a buscar</string>
 
 
     <string-array name="tipoSangre">

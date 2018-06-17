@@ -19,29 +19,53 @@
         android:theme="@style/MyFloatingButton"
         app:rippleColor="@color/colorAccent" />
 
-    <Button
-        android:id="@+id/probando"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/btn_flotatne"
-        android:layout_marginStart="112dp"
-        android:text="Base de datos"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="105dp"
-        android:text="otro intent"
-        android:id="@+id/btn_intento"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_donante"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <EditText
+                android:layout_width="0dp"
+                android:paddingLeft="5sp"
+                android:layout_height="45dp"
+                android:layout_weight="8"
+                android:hint="@string/id_del_donante_a_buscar"
+                android:background="@android:color/white"/>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_clear_black_24dp"/>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_search_black_24dp"/>
+
+        </LinearLayout>
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_donante"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

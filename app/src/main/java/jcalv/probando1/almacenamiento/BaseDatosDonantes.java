@@ -22,7 +22,7 @@ public class BaseDatosDonantes extends SQLiteOpenHelper {
                       Estructura.EstructuraDonante.COLUMN_NAME_PESO + tipo + coma +
                     Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA + tipo + " )";
 
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "ListaDonantes.sqLite";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + Estructura.EstructuraDonante.TABLE_NAME;
