@@ -5,11 +5,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jcalv.probando1.modelo.Donante;
+import jcalv.probando1.modelo.adapter.AdaptadorBorrar;
 
 public class ServicioDonante {
 
@@ -22,10 +25,12 @@ public class ServicioDonante {
         this.activity = activity;
     }
 
-
+    public ServicioDonante(Activity activity) {
+        this.activity = activity;
+    }
 
     public void guardarDonante (String identificacion, String nombre,
-            String apellido, String edad, String tipo, String rh, String peso, String estatura,
+                                String apellido, String edad, String tipo, String rh, String peso, String estatura,
                                 BaseDatosDonantes baseDatos, Activity activity){
         int aux = 0;
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
@@ -98,8 +103,38 @@ public class ServicioDonante {
         sq.close();
     }
 
-    public void buscarDonante (String identificacion, BaseDatosDonantes baseDatos, Activity activity){
+    public List<Donante> buscarDonante (EditText editIdentificacion, List<Donante> listaDonantes, AdaptadorBorrar adaptador, BaseDatosDonantes baseDatos, Activity activity){
 
+        SQLiteDatabase sq = baseDatos.getWritableDatabase();
+        listaDonantes = new ArrayList<>();
+
+        if (editIdentificacion!=null && !editIdentificacion.getText().toString().equals("")){
+
+            String comparador= "%" +editIdentificacion.getText().toString()+ "%";
+
+            Cursor cursor = sq.rawQuery("SELECT * FROM "+ Estructura.EstructuraDonante.TABLE_NAME+" WHERE "+ Estructura.EstructuraDonante.COLUMN_NAME_IDENTI+" LIKE ? OR "+ Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO+" LIKE ?;",
+                    new String[]{comparador, comparador});
+
+            if (cursor.moveToFirst()){
+                listaDonantes.clear();
+                do {
+                    int id = cursor.getInt(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_ID));
+                    String identificacion = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI));
+                    String nombre = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE));
+                    String apellido = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO));
+                    String edad = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_EDAD));
+                    String tipo = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_TIPO));
+                    String rh = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_RH));
+                    String peso = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_PESO));
+                    String estatura = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA));
+                    listaDonantes.add(new Donante(id, identificacion, nombre, apellido, edad, tipo, rh, peso, estatura));
+                }while (cursor.moveToNext());
+
+            }
+        }else {
+            Toast.makeText(activity, "Debes escribir la identificación ", Toast.LENGTH_SHORT).show();
+        }
+        sq.close();
+        return listaDonantes;
     }
-
 }

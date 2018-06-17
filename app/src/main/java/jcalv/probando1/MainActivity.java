@@ -12,6 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -31,12 +33,11 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
                                                         AlertaEditar.EditarListener{
 
     private ServicioDonante servicioDonante;
-
     private SQLiteDatabase myDatabase;
     RecyclerView recyclerView;
     private List<Donante> listaDonantes;
     private AdaptadorBorrar adaptadorBorrar;
-
+    int auxiliar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         setContentView(R.layout.activity_main);
 
         listaDonantes = new ArrayList<>();
+        final EditText editText = (EditText) findViewById(R.id.txt_buscar);
 
         FloatingActionButton btnflotatante = (FloatingActionButton) findViewById(R.id.btn_flotatne);
         btnflotatante.setOnClickListener(new View.OnClickListener() {
@@ -54,15 +56,26 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
             }
         });
 
-        //insertarDatos();
         actualizarLista();
-        adaptadorBorrar = new AdaptadorBorrar(listaDonantes);
-        adaptadorBorrar.setDonanteListener(this);
+        llenandoAdapter(listaDonantes);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adaptadorBorrar);
+        ImageButton button = (ImageButton) findViewById(R.id.btn_buscar);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buscarDonante(editText);
+                Toast.makeText(MainActivity.this, "Presiona en la X para regresar a la lista completa", Toast.LENGTH_SHORT).show();
+                editText.setText("");
+            }
+        });
+        ImageButton buttonLimpiar = (ImageButton) findViewById(R.id.btn_limpiar_busqueda);
+        buttonLimpiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                regresar();
+            }
+        });
+
 
     }
 
@@ -89,29 +102,27 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         cursor.close();
     }
 
-    private static final String tipo = " TEXT";
-    private static final String coma = ",";
-
-    private void insertarDatos(){
-
+    private void buscarDonante (EditText buscar){
         BaseDatosDonantes baseDatosDonantes = new BaseDatosDonantes(this);
-        myDatabase = baseDatosDonantes.getWritableDatabase();
-        ContentValues content = new ContentValues();
+        ServicioDonante servicioDonante = new ServicioDonante(this);
+        List<Donante> listaCompleta= servicioDonante.buscarDonante(buscar, listaDonantes, adaptadorBorrar,baseDatosDonantes, this);
 
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_IDENTI, "1");
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_DONANTE, "julio");
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_APELLIDO, "alvarez");
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_EDAD, "25");
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_TIPO, "O");
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_RH, "Negativo");
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_PESO, "75");
-        content.put(Estructura.EstructuraDonante.COLUMN_NAME_ESTATURA, "168");
-        myDatabase.insert(Estructura.EstructuraDonante.TABLE_NAME, null, content);
-
-        Toast.makeText(this, "Usuario ha sido guardado", Toast.LENGTH_SHORT).show();
-        myDatabase.close();
+        llenandoAdapter(listaCompleta);
+    }
+    private void regresar (){
+        listaDonantes = new ArrayList<>();
+        actualizarLista();
+        llenandoAdapter(listaDonantes);
     }
 
+    private void llenandoAdapter(List<Donante> lista){
+        adaptadorBorrar = new AdaptadorBorrar(lista);
+        adaptadorBorrar.setDonanteListener(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_donante);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adaptadorBorrar);
+    }
 
     @Override
     public void agregarDonante(Donante donante) {
@@ -170,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         alertaEditar.getTxtRh(rh);
         alertaEditar.getTxtPeso(peso);
         alertaEditar.getTxtEstatura(estatura);
-
     }
 
 

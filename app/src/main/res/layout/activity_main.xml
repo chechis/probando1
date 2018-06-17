@@ -36,6 +36,7 @@
                 android:paddingLeft="5sp"
                 android:layout_height="45dp"
                 android:layout_weight="8"
+                android:id="@+id/txt_buscar"
                 android:hint="@string/id_del_donante_a_buscar"
                 android:background="@android:color/white"/>
 
@@ -44,14 +45,16 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
-                android:src="@drawable/ic_clear_black_24dp"/>
+                android:src="@drawable/ic_clear_black_24dp"
+                android:id="@+id/btn_limpiar_busqueda"/>
 
             <android.support.v7.widget.AppCompatImageButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
-                android:src="@drawable/ic_search_black_24dp"/>
+                android:src="@drawable/ic_search_black_24dp"
+                android:id="@+id/btn_buscar"/>
 
         </LinearLayout>
 
