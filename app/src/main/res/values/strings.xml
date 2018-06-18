@@ -14,6 +14,10 @@
     <string name="donante_tool">Donantes</string>
     <string name="no_identificacion">No. Identificacion</string>
     <string name="id_del_donante_a_buscar">Id del donante a buscar</string>
+    <string name="cambiar_contase_a">Cambiar contraseña</string>
+    <string name="actualizar">ACTUALIZAR</string>
+    <string name="contrase_a_nueva">Contraseña nueva</string>
+    <string name="verificar_contrase_a">Verificar Contraseña</string>
 
 
     <string-array name="tipoSangre">

@@ -83,7 +83,7 @@ public class AdaptadorBorrar extends RecyclerView.Adapter<AdaptadorBorrar.Adapta
         holder.txtEdad.setText("Edad "+ donante.getEdad()+" años");
         holder.txtPeso.setText("Peso "+ donante.getPeso()+" Kg");
         holder.txtEstatura.setText("Estatura "+ donante.getEstatura()+" cm");
-        holder.txtRh.setText("RH "+ donante.getRhTexto());
+        holder.txtRh.setText("Rh "+ donante.getRhTexto());
         holder.txtTipo.setText("Tipo "+ donante.getTipoTexto());
     }
 

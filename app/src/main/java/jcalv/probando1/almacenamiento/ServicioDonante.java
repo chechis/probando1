@@ -132,9 +132,47 @@ public class ServicioDonante {
 
             }
         }else {
-            Toast.makeText(activity, "Debes escribir la identificación ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "Debes escribir la identificación del donante", Toast.LENGTH_SHORT).show();
         }
         sq.close();
+
         return listaDonantes;
+    }
+
+    public void elimarUsuario(String usuario, BaseDatos baseDatos, Activity activity){
+
+        SQLiteDatabase sq = baseDatos.getWritableDatabase();
+
+        sq.execSQL("DELETE FROM "+ Estructura.EstructuraBase.TABLE_NAME+" WHERE "+ Estructura.EstructuraBase.COLUMN_NAME_CLIENTE+"=?;",
+                new Object[]{usuario});
+
+        Toast.makeText(activity, "Se ha eliminado el usuario", Toast.LENGTH_SHORT).show();
+        sq.close();
+    }
+
+    public void cambiarContrasena (String contrasena, String nuevaContrasena, BaseDatos baseDatos, Activity activity){
+        SQLiteDatabase sq = baseDatos.getWritableDatabase();
+        ContentValues content = new ContentValues();
+        int aux =0;
+        if (contrasena!= null){
+            String comparador;
+            Cursor cursor = sq.rawQuery("SELECT * FROM "+ Estructura.EstructuraBase.TABLE_NAME, null);
+            if (cursor.moveToFirst()){
+                do {
+                    comparador = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_CONTRASENA));
+                    if (comparador.equals(contrasena)){
+                        aux = 1;
+                    }
+                }while (cursor.moveToNext());
+            }
+
+            if (aux==1){
+                String comparador2= Estructura.EstructuraBase.COLUMN_NAME_CONTRASENA + " LIKE "+ contrasena;
+                content.put(Estructura.EstructuraBase.COLUMN_NAME_CONTRASENA, nuevaContrasena);
+                sq.update(Estructura.EstructuraBase.TABLE_NAME, content, comparador2, null);
+                Toast.makeText(activity, "La contraseña ha sido modificada", Toast.LENGTH_SHORT).show();
+            }
+        }
+        sq.close();
     }
 }

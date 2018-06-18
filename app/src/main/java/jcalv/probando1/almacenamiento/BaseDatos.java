@@ -16,7 +16,7 @@ public class BaseDatos extends SQLiteOpenHelper {
             + Estructura.EstructuraBase.COLUMN_NAME_CLIENTE + tipo + coma +
             Estructura.EstructuraBase.COLUMN_NAME_CONTRASENA + tipo + " )";
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "Usuarios.sqLite";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + Estructura.EstructuraBase.TABLE_NAME;

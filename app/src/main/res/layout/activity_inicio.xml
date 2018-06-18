@@ -49,8 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Usuario"
-                    android:inputType="text"
-                    android:text="chechis"/>
+                    android:inputType="text"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -66,7 +65,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
                     android:hint="Contraseña"
-                    android:text="4125.5951"
                     android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>

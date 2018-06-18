@@ -1,9 +1,11 @@
 package jcalv.probando1;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,22 +25,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import jcalv.probando1.almacenamiento.BaseDatos;
 import jcalv.probando1.almacenamiento.BaseDatosDonantes;
 import jcalv.probando1.almacenamiento.Estructura;
 import jcalv.probando1.almacenamiento.ServicioDonante;
+import jcalv.probando1.inicio.ActivityInicio;
 import jcalv.probando1.modelo.Donante;
 
 import jcalv.probando1.modelo.adapter.AdaptadorBorrar;
 
 public class MainActivity extends AppCompatActivity implements AlertaDatos.DatosListener, AdaptadorBorrar.DonanteListener,
-                                                        AlertaEditar.EditarListener{
+                                                        AlertaEditar.EditarListener, AlertaCambioContra.CambiarContrasena{
 
     private ServicioDonante servicioDonante;
     private SQLiteDatabase myDatabase;
     RecyclerView recyclerView;
     private List<Donante> listaDonantes;
     private AdaptadorBorrar adaptadorBorrar;
-    int auxiliar;
+    String usuarioNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
             @Override
             public void onClick(View view) {
                 buscarDonante(editText);
-                Toast.makeText(MainActivity.this, "Presiona en la X para regresar a la lista completa", Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, "Presiona en la X para regresar a la lista completa", Snackbar.LENGTH_SHORT).show();
                 editText.setText("");
             }
         });
@@ -239,17 +243,41 @@ public class MainActivity extends AppCompatActivity implements AlertaDatos.Datos
         int id = item.getItemId();
 
         if (id==R.id.elimar_cuenta){
+            Bundle parametro = this.getIntent().getExtras();
+            usuarioNombre= parametro.getString("nombre");
 
+            Intent intent = new Intent(this, ActivityInicio.class);
+            startActivity(intent);
+
+            BaseDatos baseDatos = new BaseDatos(this);
+            ServicioDonante servicioDonante = new ServicioDonante(this);
+            servicioDonante.elimarUsuario(usuarioNombre, baseDatos, this);
         }
         if (id==R.id.cambiar){
+            Bundle parametro = this.getIntent().getExtras();
+            String contrasena= parametro.getString("contrasena");
 
+            AlertaCambioContra alertaCambioContra = new AlertaCambioContra();
+            alertaCambioContra.show(getSupportFragmentManager(), "Cambiar contrasena");
+
+            alertaCambioContra.getContrasena(contrasena);
         }
-
         if (id== R.id.cerrar){
-
+            Intent intent = new Intent(this, ActivityInicio.class);
+            startActivity(intent);
         }
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void cambiarContrasena(String contrasena, String nuevaContrasena) {
+
+        BaseDatos baseDatos = new BaseDatos(this);
+        ServicioDonante servicioDonante = new ServicioDonante(this);
+        servicioDonante.cambiarContrasena(contrasena, nuevaContrasena, baseDatos, this);
+
+
     }
 }

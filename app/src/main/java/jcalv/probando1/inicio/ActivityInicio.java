@@ -49,6 +49,8 @@ public class ActivityInicio extends AppCompatActivity implements AlertaInicio.Us
     }
     public void iniciar (View view){
         boolean login = true;
+        Bundle parametro = new Bundle();
+
 
         usuario = (TextInputLayout) findViewById(R.id.edit_username);
         contrasena = (TextInputLayout) findViewById(R.id.edit_password);
@@ -73,6 +75,9 @@ public class ActivityInicio extends AppCompatActivity implements AlertaInicio.Us
 
                 if (servicioInicio.confirmarUsuario(nombreUsuario, nombreContrasena, baseDatos) == 2){
                     Intent intent = new Intent(this, MainActivity.class);
+                    parametro.putString("nombre", nombreUsuario);
+                    parametro.putString("contrasena", nombreContrasena);
+                    intent.putExtras(parametro);
                     startActivity(intent);
                 }
             }
